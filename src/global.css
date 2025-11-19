@@ -1,0 +1,43 @@
+@import 'leaflet/dist/leaflet.css';
+
+/* Leaflet map container fixes */
+.leaflet-container {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Fix for Leaflet markers */
+.leaflet-marker-icon {
+  border: none !important;
+  background: transparent !important;
+}
+
+/* Custom marker styles */
+.custom-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.leaflet-popup-content {
+  margin: 12px;
+  line-height: 1.4;
+  font-family: inherit;
+}
+
+/* Ensure map container has proper dimensions */
+.h-96 {
+  height: 24rem;
+}
+
+/* Print styles - hide map when printing */
+@media print {
+  .leaflet-container {
+    display: none !important;
+  }
+}
