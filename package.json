@@ -48,7 +48,6 @@
     "styled-components": "^6.1.12",
     "swiper": "^11.2.10",
     "three": "^0.180.0",
-    "vite-plugin-require": "^1.1.14",
     "zustand": "^4.5.5"
   },
   "devDependencies": {
