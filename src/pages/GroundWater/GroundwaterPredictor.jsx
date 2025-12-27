@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+
 const GroundwaterPredictor = () => {
   const [formData, setFormData] = useState({
     state: "",
@@ -33,7 +36,7 @@ const GroundwaterPredictor = () => {
   const fetchStates = async () => {
     setLoadingOptions(prev => ({ ...prev, states: true }));
     try {
-      const response = await fetch('/api/states');
+      const response = await fetch(`${API_URL}/api/states`);
       if (!response.ok) throw new Error('Failed to fetch states');
       const states = await response.json();
       setOptions(prev => ({ ...prev, states }));
@@ -48,7 +51,7 @@ const GroundwaterPredictor = () => {
     if (!state) return;
     setLoadingOptions(prev => ({ ...prev, districts: true }));
     try {
-      const response = await fetch(`/api/districts/${encodeURIComponent(state)}`);
+      const response = await fetch(`${API_URL}/api/districts/${encodeURIComponent(state)}`);
       if (!response.ok) throw new Error('Failed to fetch districts');
       const districts = await response.json();
       setOptions(prev => ({ ...prev, districts }));
@@ -63,7 +66,7 @@ const GroundwaterPredictor = () => {
     if (!state || !district) return;
     setLoadingOptions(prev => ({ ...prev, tehsils: true }));
     try {
-      const response = await fetch(`/api/tehsils/${encodeURIComponent(state)}/${encodeURIComponent(district)}`);
+      const response = await fetch(`${API_URL}/api/tehsils/${encodeURIComponent(state)}/${encodeURIComponent(district)}`);
       if (!response.ok) throw new Error('Failed to fetch tehsils');
       const tehsils = await response.json();
       setOptions(prev => ({ ...prev, tehsils }));
@@ -78,7 +81,7 @@ const GroundwaterPredictor = () => {
     if (!state || !district || !tehsil) return;
     setLoadingOptions(prev => ({ ...prev, villages: true }));
     try {
-      const response = await fetch(`/api/villages/${encodeURIComponent(state)}/${encodeURIComponent(district)}/${encodeURIComponent(tehsil)}`);
+      const response = await fetch(`${API_URL}/api/villages/${encodeURIComponent(state)}/${encodeURIComponent(district)}/${encodeURIComponent(tehsil)}`);
       if (!response.ok) throw new Error('Failed to fetch villages');
       const villages = await response.json();
       setOptions(prev => ({ ...prev, villages }));
@@ -119,7 +122,7 @@ const GroundwaterPredictor = () => {
     setError(null);
 
     try {
-      const response = await fetch('/api/predict', {
+      const response = await fetch(`${API_URL}/api/predict`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
